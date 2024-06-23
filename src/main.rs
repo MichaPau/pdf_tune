@@ -1,17 +1,15 @@
 use std::borrow::Cow;
 
+use std::io::BufReader;
+use std::io::Read;
 use std::io::Write;
 
 use std::path::Path;
 use std::path::PathBuf;
 
-use std::io::BufReader;
-use std::io::Read;
 use std::process;
 
 use regex::bytes::Regex;
-
-
 
 fn main() {
 
@@ -38,8 +36,6 @@ fn main() {
         panic!("file is not a pdf file");
     }
     
-    // println!("Source      : {:?}", path);
-    // println!("Destination : {:?}", path_dest);
 
     let pdf_file = std::fs::File::open(&path).unwrap();
     let mut buffer = BufReader::new(pdf_file);
@@ -72,7 +68,6 @@ fn change_file_name(path: impl AsRef<Path>, name: &str) -> PathBuf {
     result
 }
 
-//https://superuser.com/a/1770617
 fn replace_fit_bookmark(haystack: &[u8]) -> Cow<[u8]> {
     let to_bytes = "/XYZ null null null".to_string().into_bytes();
     let re = Regex::new(r"/Fit").unwrap();
