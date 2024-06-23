@@ -8,7 +8,7 @@ Usage
 `
 pdf_tune [valid_path_to_pdf]
 `
-Creates a new pdf file with [filename](new).pdf
+Creates a new pdf file with '\[filename](new).pdf' at the same location
 
 `
 pdf_tune [valid_path_to_pdf] replace
