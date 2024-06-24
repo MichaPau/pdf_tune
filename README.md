@@ -17,7 +17,7 @@ Replaces original pdf file with the updated content (Use at your own risk).
 
 ---
 
-If it doesn't work, it may be that the destination defintions for the bookmarks are compressed and not 'readable'.
+If it doesn't work, it may be that the destination defintions for the bookmarks are compressed and not 'readable'.  
 (1),(2)
 
 Only solution I have found so far is to uncompress the pdf file (with [pdftk](http://www.pdflabs.com/docs/pdftk-man-page/#dest-compress) or [QPDF](http://qpdf.sourceforge.net/))
@@ -28,7 +28,7 @@ and compress it again (if you care about file size)..
 
 --
 
-(1) - https://unix.stackexchange.com/questions/269033/how-to-remove-zoom-information-from-a-pdf-bookmark
+(1) - https://unix.stackexchange.com/questions/269033/how-to-remove-zoom-information-from-a-pdf-bookmark  
 (2) - https://unix.stackexchange.com/questions/17663/how-to-know-if-a-pdf-file-is-compressed-or-not-and-to-uncompress-it
 
 
