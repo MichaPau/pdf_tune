@@ -17,7 +17,7 @@ fn main() {
     
     let replace_flag:bool = match std::env::args().nth(2) {
         Some(arg) => {
-            if arg == "replace".to_string() {
+            if arg == "replace" {
                 true
             } else {
                 panic!("no surch arg as {}", arg);
@@ -36,12 +36,8 @@ fn main() {
         panic!("file is not a pdf file");
     }
     
+    let content = read_file_content(&path).expect("could not read file content");
 
-    let pdf_file = std::fs::File::open(&path).unwrap();
-    let mut buffer = BufReader::new(pdf_file);
-    let mut content = Vec::new();
-    buffer.read_to_end(&mut content).unwrap();
-    
     let new_content = replace_fit_bookmark(&content);
 
     if replace_flag {
@@ -58,6 +54,13 @@ fn main() {
 
 }
 
+fn read_file_content(path: &PathBuf) -> std::io::Result<Vec<u8>> {
+    let pdf_file = std::fs::File::open(path).unwrap();
+    let mut buffer = BufReader::new(pdf_file);
+    let mut content = Vec::new();
+    buffer.read_to_end(&mut content).unwrap();
+    Ok(content)
+}
 fn change_file_name(path: impl AsRef<Path>, name: &str) -> PathBuf {
     let path = path.as_ref();
     let mut result = path.to_owned();
@@ -89,25 +92,8 @@ fn save_file(path: &PathBuf, content: &[u8]) -> std::io::Result<()> {
     new_file.write_all(content)?;
     Ok(())
 }
-// ten times slower than regexp replace
-fn _replace<T>(source: &[T], from: &[T], to: &[T]) -> Vec<T>
-where
-    T: Clone + PartialEq
-{
-    let mut result = source.to_vec();
-    let from_len = from.len();
-    let to_len = to.len();
 
-    let mut i = 0;
-    while i + from_len <= result.len() {
-        if result[i..].starts_with(from) {
-            result.splice(i..i + from_len, to.iter().cloned());
-            i += to_len;
-        } else {
-            i += 1;
-        }
-    }
 
-    result
-}
+
+
 
